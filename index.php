@@ -112,13 +112,13 @@ require 'cek.php';
                         <td><?=$jenis;?></td>
                         <td><?=$stock;?></td>
                         <td>
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?=$idb?>">Edit</button>
                           <!-- <input type="hidden" name="idbarangyangmaudihapus" value="<?=$idb;?>"> -->
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del">Delete</button>
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idb;?>">Delete</button>
                         </td>
                       </tr>
                       <!-- Edit Modal -->
-                      <div class="modal fade" id="edit">
+                      <div class="modal fade" id="edit<?=$idb;?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -133,9 +133,7 @@ require 'cek.php';
                                 <br />
                                 <input type="text" name="jenis" placeholder="Jenis Bahan Baku" class="form-control" required />
                                 <br />
-                                <input type="number" name="stock" class="form-control" placeholder="Stock" required />
-                                <br />
-                                <button type="submit" class="btn btn-primary" name="addnewbarang">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="updatebarang">Submit</button>
                               </div>
                             </form>
                           </div>
@@ -143,12 +141,12 @@ require 'cek.php';
                       </div>
 
                       <!-- Delete Modal -->
-                      <div class="modal fade" tabindex="-1" id="del">
+                      <div class="modal fade"  id="delete<?=$idb;?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <!-- Modal Header -->
                             <div class="modal-header">
-                              <h4 class="modal-title">Delete Barang</h4>
+                              <h4 class="modal-title">Hapus Barang</h4>
                               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               <br />
                             </div>
@@ -156,13 +154,11 @@ require 'cek.php';
                             <!-- Modal body -->
                             <form method="post">
                               <div class="modal-body">
-                                <input type="text" name="namabarang" placeholder="Nama Bahan Baku" class="form-control" required />
+                                <input type="text" name="namabarang" value="<?=$namabarang;?>" class="form-control" required />
                                 <br />
-                                <input type="text" name="jenis" placeholder="Jenis Bahan Baku" class="form-control" required />
+                                <input type="text" name="jenis" value="<?=$jenis;?>" class="form-control" required />
                                 <br />
-                                <input type="number" name="stock" class="form-control" placeholder="Stock" required />
-                                <br />
-                                <button type="submit" class="btn btn-primary" name="addnewbarang">Submit</button>
+                                <button type="submit" class="btn btn-danger" name="addnewbarang">Hapus</button>
                               </div>
                             </form>
                           </div>
