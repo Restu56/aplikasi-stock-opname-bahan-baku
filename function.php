@@ -89,17 +89,17 @@ if(isset($_POST["updatebarang"])){
 }
 
 // Menghapus barang dari stock
-// if(isset($_POST['hapusbarang'])){
-//     $idb = $_POST['idb'];
+if(isset($_POST['hapusbarang'])){
+    $idb = $_POST['idb'];
 
-//    $hapus = mysqli_query($conn, "delete from stock where idbarang='$idb'"); 
-//     if($hapus){
-//      header("location:index.php");
-//    } else {
-//       echo 'Gagal';
-//      header("location:index.php");
-//    }
-// }
+   $hapus = mysqli_query($conn, "delete from stock where idbarang='$idb'"); 
+    if($hapus){
+     header("location:index.php");
+   } else {
+      echo 'Gagal';
+     header("location:index.php");
+   }
+}
 
 // mengubah barang masuk
 if(isset($_POST{'editbarangmasuk'})){

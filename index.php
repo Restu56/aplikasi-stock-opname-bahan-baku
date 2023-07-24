@@ -113,7 +113,7 @@ require 'cek.php';
                         <td><?=$stock;?></td>
                         <td>
                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?=$idb?>">Edit</button>
-                          <!-- <input type="hidden" name="idbarangyangmaudihapus" value="<?=$idb;?>"> -->
+                          <input type="hidden" name="idbarangyangmaudihapus" value="<?=$idb;?>">
                           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idb;?>">Delete</button>
                         </td>
                       </tr>
@@ -129,11 +129,11 @@ require 'cek.php';
 
                             <form method="post">
                               <div class="modal-body">
-                                <input type="text" name="namabarang" placeholder="Nama Bahan Baku" class="form-control" required />
+                                <input type="text" name="namabarang" value="<?=$namabarang;?>" class="form-control" required />
+                                <br/>
+                                <input type="text" name="jenis" value="<?=$jenis;?>" class="form-control" required />
                                 <br />
-                                <input type="text" name="jenis" placeholder="Jenis Bahan Baku" class="form-control" required />
-                                <br />
-                                <button type="submit" class="btn btn-primary" name="updatebarang">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="updatebarang">Ubah</button>
                               </div>
                             </form>
                           </div>
@@ -158,15 +158,15 @@ require 'cek.php';
                                 <br />
                                 <input type="text" name="jenis" value="<?=$jenis;?>" class="form-control" required />
                                 <br />
-                                <button type="submit" class="btn btn-danger" name="addnewbarang">Hapus</button>
+                                <button type="submit" class="btn btn-danger" name="hapusbarang">Hapus</button>
                               </div>
                             </form>
                           </div>
                         </div>
                       </div>
                       <?php  
-                                        }
-                                        ;?>
+                      }
+                      ;?>
                     </tbody>
                   </table>
                 </div>
