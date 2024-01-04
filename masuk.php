@@ -71,7 +71,7 @@ require 'cek.php';
                         <h4 class="mt-4"><strong><i class="fa-solid fa-box-open"></i>BARANG MASUK</strong></h4>
                         <div class="card mb-4">
                             <div class="card-header">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
                                     <i class="fa-solid fa-plus"></i> Tambah Barang
                                 </button>
                                     <a href="export_masuk.php" type="button" class="btn btn-danger">Export Data</a>
@@ -94,9 +94,11 @@ require 'cek.php';
                                     <table  class="table table-bordered table-striped" id="datatablesSimple" width="100%" cellspasing="0">                                                           
                                         <thead>
                                             <tr>
+                                                <th>No.</th>
                                                 <th>Tanggal</th>
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah</th>
+                                                <th>Total Harga</th>
                                                 <th>Petugas</th>
                                                 <th>Aksi</th>
                                                 
@@ -104,13 +106,14 @@ require 'cek.php';
                                         </thead>
                                         <tbody>
                                             <?php 
+                                            $i=1;
                                             if(isset($_POST['filtertglmasuk'])){
                                                 $mulai = $_POST['tgl_mulai'];
                                                 $akhir = $_POST['tgl_akhir'];
                                                 if($mulai != null || $akhir != null){
                                                 
                                                     $ambilsemuadatastock = mysqli_query($conn, "select * from masuk m, stock s  where s.idbarang = m.idbarang and
-                                                   tanggal BETWEEN  '$mulai' and DATE_ADD('$akhir', INTERVAL 1 DAY) order by idmasuk DESC"); 
+                                                   tanggal BETWEEN  '$mulai' and '$akhir' order by idmasuk DESC"); 
                                                 } else {
                                                     $ambilsemuadatastock = mysqli_query($conn, "select * from masuk m, stock s  where s.idbarang = m.idbarang  ORDER BY idmasuk DESC");
                                                 }
@@ -126,22 +129,24 @@ require 'cek.php';
                                                 $tanggal = $data['tanggal'];
                                                 $namabarang = $data['namabarang'];
                                                 $qty = $data['qty'];
+                                                $harga = $data['harga'];
+                                                $total = $data['harga'] * $data['qty'];
                                                 $petugas = $data['petugas'];
 
                                                                                         
                                             ; ?>
                                             <tr>
+                                                <td><?=$i++;?>.</td>
                                                 <td><?=$tanggal;?></td> 
                                                 <td><?=$namabarang;?></td>   
-                                                <td><?=$qty;?></td>   
-                                                <td><?=$petugas;?></td>                
+                                                <td><?=$qty;?></td>  
+                                                <td>Rp.<?=number_format($total, '2', ',','.');?></td> 
+                                                <td><?=$petugas;?></td>               
                                                 <td>
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?=$idm;?>"><i class="fa-solid fa-pen-to-square"></i></button>
                                                     <input type="hidden" name="idbarangyangmaudihapus" value="<?=$idb;?>">
                                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idm;?>"><i class="fa-solid fa-trash-can"></i></button>     
-                                            
                                                 </td>
-
                                             </tr>
                                             <!-- Edit Modal -->
                                             <div class="modal" id="edit<?=$idm;?>">

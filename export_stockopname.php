@@ -19,8 +19,10 @@ require 'cek.php';
 
 <body>
 <div class="container">
-<h2>Stock Bahan</h2>
-<h4>(Inventory)</h4>
+<h2>Stock opname</h2>
+        <button>
+            <a type="button" class="btn btn-dark"href="stock_opname.php">Kembali</a>
+        </button>
     <form method="post" class="row g-3 mt-1">
         <div class="col-md-3">
             <input type="date" class="form-control" name="tgl_mulai">
@@ -29,13 +31,14 @@ require 'cek.php';
             <input type="date" class="form-control" name="tgl_akhir">
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary" name="filtertanggal">Filter</button>
+            <button class="btn btn-dark" name="filtertanggal">Filter</button>
         </div>
     </form>
     <div class="data-tables datatable-dark">
         <table class="table table-bordered table-striped" id="exportmasuk" width="100%" cellspasing="0">                   
             <thead class="table table-dark text-center">
                 <tr>
+                    <th width="20">No.</th>
                     <th width="300">Tanggal SO</th>
                     <th width="200">Nama Barang</th>
                     <th width="150">Stock Sistem</th>
@@ -47,6 +50,7 @@ require 'cek.php';
             </thead>
             <tbody>  
             <?php 
+            $i=1;
             if(isset($_POST['filtertanggal'])){
                 $mulai = $_POST['tgl_mulai'];
                 $akhir = $_POST['tgl_akhir'];
@@ -75,6 +79,7 @@ require 'cek.php';
                 $keterangan = $data['keterangan'];                                    
             ; ?>
                 <tr>
+                    <td align="center"><?php echo$i++;?></td>
                     <td align="center"><?php echo$tanggal;?></td>
                     <td align="left"><?php echo$namabarang;?></td>
                     <td align="center"><?php echo$qty;?></td>
@@ -82,10 +87,7 @@ require 'cek.php';
                     <td align="center"><?php echo$selisih;?></td>  
                     <td align="right">Rp.<?php echo number_format($selisihdana,2,',','.');?></td>
                     <td align="center"><?php echo$keterangan;?></td>
-
-                </tr> 
-                
-                
+                </tr>               
                 <?php  
                 }
                 ;?>                                                 

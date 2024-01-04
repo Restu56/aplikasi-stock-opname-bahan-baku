@@ -23,7 +23,7 @@ require 'function.php';
       <form method="post">
         <h1>Login</h1>
         <div class="input-box">
-          <input type="text" name="email" placeholder="Username" required />
+          <input type="text" name="email" placeholder="Username or Email" required />
           <i class="bx bxs-user"></i>
         </div>
         <div class="input-box">
@@ -31,15 +31,10 @@ require 'function.php';
           <i class="bx bxs-lock-alt"></i>
         </div>
 
-        <div class="remember-forget">
-          <label><input type="checkbox" />Remember Me</label>
-          <a href="">Forgot Password</a>
-        </div>
-
         <button  class="btn" name="login">Login</button>
 
         <div class="register-link">
-          <p>Don't have an account? <a href="signup.php">Register</a></p>
+          <p>Don't have an account? <a href="signup.php"> Register</a></p>
         </div>
       </form>
     </div>

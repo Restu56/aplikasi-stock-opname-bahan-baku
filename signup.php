@@ -28,7 +28,7 @@ require 'function.php';
                     <i class="bx bxs-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" name="email" placeholder="email" required />
+                    <input type="email" name="email" placeholder="email" required />
                     <i class="bx bxs-envelope"></i>
                 </div>
                 <div class="input-box">

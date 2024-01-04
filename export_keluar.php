@@ -19,8 +19,8 @@ require 'cek.php';
 
 <body>
 <div class="container">
-<h2>Stock Bahan</h2>
-<h4>(Inventory)</h4>
+<button><a href="keluar.php" type="button" class="btn btn-light">Kembali</a></button>
+<h2>Barang Keluar</h2>
     <form method="post" class="row g-3 mt-1">
         <div class="col-md-3">
             <input type="date" class="form-control" name="tgl_mulai">
@@ -29,7 +29,7 @@ require 'cek.php';
             <input type="date" class="form-control" name="tgl_akhir">
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary" name="filtertglmasuk">Filter</button>
+            <button class="btn btn-dark" name="filtertglmasuk">Filter</button>
         </div>
     </form>
     <div class="data-tables datatable-dark">

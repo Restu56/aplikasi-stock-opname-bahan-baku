@@ -78,6 +78,10 @@ $agustus = mysqli_query($conn, "SELECT  SUM(qty) as 'agustus' FROM masuk WHERE t
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                                 Stock Opname
                             </a>
+                            <a class="nav-link" href="stock_opname.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                About
+                            </a>
                             <a class="nav-link" href="logout.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-right-from-bracket"></i></div>
                                 Logout
@@ -128,7 +132,7 @@ $agustus = mysqli_query($conn, "SELECT  SUM(qty) as 'agustus' FROM masuk WHERE t
                                         <div class="card mb-4 bg-light text-dark">
                                             <div class="card-header" >
                                                 <i class="fas fa-chart-column me-1"></i>
-                                                 Baranng Masuk
+                                                 Barang Masuk
                                             </div> 
                                             <div class="card-body">                                               
                                                 <canvas id="barchart"></canvas>
@@ -210,5 +214,12 @@ $agustus = mysqli_query($conn, "SELECT  SUM(qty) as 'agustus' FROM masuk WHERE t
             }
             });
         </script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>

@@ -88,16 +88,18 @@ require 'cek.php';
                                 <table  class="table table-bordered table-striped" id="datatablesSimple" width="100%" cellspasing="0">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Tanggal</th>
                                             <th>Nama Barang</th>
                                             <th>Jumlah</th>
+                                            <th>Total Harga</th>
                                             <th>Petugas</th>
-                                            <th>Penerima</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php 
+                                        $i=1;
                                         if(isset($_POST['filtertglkeluar'])){
                                             
                                             $mulai = $_POST['tgl_mulai'];
@@ -121,16 +123,17 @@ require 'cek.php';
                                             $tanggal = $data['tanggal'];
                                             $namabarang = $data['namabarang'];
                                             $qty = $data['qty'];
+                                            $total = $data['harga'] * $data['qty'];
                                             $petugas = $data['petugas'];
-                                            $penerima = $data['penerima'];
 
                                         ; ?>
                                         <tr>
+                                            <td><?=$i++;?>.</td>
                                             <td><?=$tanggal;?></td>
                                             <td><?=$namabarang;?></td>
                                             <td><?=$qty;?></td>
+                                            <td>Rp.<?=number_format($total,'2',',','.');?></td>
                                             <td><?=$petugas;?></td>
-                                            <td><?=$penerima;?></td>
                                             <td>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit<?=$idk;?>"><i class="fa-solid fa-pen-to-square"></i></button>
                                                 <input type="hidden" name="idbarangyangmaudihapus" value="<?=$idb;?>">

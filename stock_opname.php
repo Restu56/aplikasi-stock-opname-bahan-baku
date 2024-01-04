@@ -56,11 +56,7 @@ require 'cek.php';
                             <a class="nav-link" href="logout.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-right-from-bracket"></i></div>
                                 Logout
-                            </a>
-                            
-                            
-                            
-                            
+                            </a> 
                         </div>
                     </div>
                 </nav>
@@ -72,122 +68,115 @@ require 'cek.php';
                         <div class="card mb-4">
                             <div class="card-header">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahso">
-                                <i class="fa-solid fa-plus"></i>Tambah SO
+                                    <i class="fa-solid fa-plus"></i> Tambah Barang
                                 </button>
-                               <button type="button" class="btn btn-danger">
-                               <i class="fa-solid fa-file"></i> Export Data
+                                    <a href="export_stockopname.php" type="button" class="btn btn-danger">Export Data</a>
                                 </button>
-                                <div class="container p-1">
-                                        <div class="row">
-                                            <form action="post" class="form-inline"></form>
-                                            <div class="col">
-                                                <input type="date" name="tglmulai" class="form-control">
-                                            </div>
-                                            <div class="col">
-                                                <input type="date" name="tglmulai" class="form-control">
-                                            </div>                                           
-                                            <div class="col">
-                                                <button type="submit" name="filtertgl" class="btn btn-primary">Filter</button>
-                                            </div>
-                                        </div>
+                                <form method="post" class="row g-3 mt-1">
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control" name="tglmulai">
                                     </div>
-                                </div>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control" name="tglakhir">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-primary" name="filtertglstockopnme">Filter</button>
+                                    </div>
+                                </form>
+                                
+                            </div> 
                             <div class="card-body">
-                            <div class="table-responsive">
-                                <table  class="table table-bordered table-striped" id="datatablesSimple" width="100%" cellspasing="0">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th>No.</th>
-                                            <th>Tanggal</th>
-                                            <th>Nama Barang</th>
-                                            <th>Stock Sistem</th>
-                                            <th>Stock Fisik</th>
-                                            <th>Selisih</th>
-                                            <th>Selisih dana</th>
-                                            <th>Petugas</th>
-                                            <th>Keterangan</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php 
-                                        if(isset($_POST['filtertgl'])){
-                                            
-                                            $mulai = $_POST['tgl_mulai'];
-                                            $akhir = $_POST['tgl_akhir'];
-                                            if($mulai != null || $akhir != null){
-                                            
-                                                $ambilsemuadatastock = mysqli_query($conn, "select * from stockopname so, stock s where s.idbarang = so.idbarang and
-                                                 tanggal BETWEEN  '$mulai' and DATE_ADD('$akhir', INTERVAL 1 DAY) order by idstockopname DESC"); 
-                                            } else {
-                                                $ambilsemuadatastock = mysqli_query($conn, "select * from stockopname so, stock s where s.idbarang = so.idbarang  ORDER BY idstockopname DESC");
-                                            }
-                                        
-                                        
-                                        } else {
-                                            $ambilsemuadatastock = mysqli_query($conn, "select * from stockopname so, stock s where s.idbarang = so.idbarang");
-
-                                        }                                      
-                                        $i=1;
-                                        while($data=mysqli_fetch_array($ambilsemuadatastock)){
-                                            $ids = $data['idstockopname'];
-                                            $idb = $data['idbarang'];
-                                            $tanggal =$data['tanggal'];
-                                            $namabarang = $data['namabarang'];
-                                            $jenis = $data['jenis'];
-                                            $qty = $data['stocksistem'];
-                                            $stockfisik = $data['stockfisik'];
-                                            $selisih = $data['selisih'];
-                                            $petugas = $data['petugas'];
-                                            $keterangan = $data['keterangan'];
-                                            $harga = $data['harga'];
-                                            $selisihharga = $data['selisih_harga'] ;
-                                                                                    
-                                        ; ?>
-                                        <tr>
-                                            <td><?=$i++;?></td>
-                                            <td><?=$tanggal;?></td>
-                                            <td><?=$namabarang;?></td>
-                                            <td><?=$qty;?></td>
-                                            <td><?=$stockfisik;?></td>
-                                            <td><?=$selisih;?></td>
-                                            <td>Rp. <?= number_format($selisihharga,2,',','.')   ;?></td>
-                                            <td><?=$petugas;?></td>
-                                            <td><?=$keterangan;?></td>
-
-                                        </tr>
-                                         <!-- Edit Modal -->
-                                        <div class="modal" id="edit<?=$ids;?>">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title"><strong>EDIT STOCK OPNAME</strong></h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                    </div>
-
-                                                    <!-- Modal body -->
-                                                    <form method="post">
-                                                        <div class="modal-body">
-                                                            <input type="number" name="stockfisik" value="<?=$stockfisik;?>" class="form-control" placeholder="Stock fisik" required>
-                                                            <br>
-                                                            <input type="text" name="petugas" value="<?=$petugas;?>" class="form-control" placeholder="Petugas" required>
-                                                            <br>
-                                                            <input type="hidden" name="idb" value="<?=$idb;?>">
-                                                            <input type="hidden" name="idm" value="<?=$ids;?>">
-                                                            <button type="submit" class="btn btn-primary" name="updatebarangso">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>                                       
+                                <div class="datatablesSimple">
+                                    <table  class="table table-bordered table-striped" id="datatablesSimple" width="100%" cellspasing="0">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>No.</th>
+                                                <th>Tanggal</th>
+                                                <th>Nama Barang</th>
+                                                <th>Stock Sistem</th>
+                                                <th>Stock Fisik</th>
+                                                <th>Selisih</th>
+                                                <th>Selisih dana</th>
+                                                <th>Petugas</th>
+                                                <th>Keterangan</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php 
-                                        } 
-                                        ; ?>                                  
-                                    </tbody>
-                                </table>  
-                            </div>
+                                            if(isset($_POST['filtertglstockopnme'])){             
+                                            $mulai = $_POST['tglmulai'];
+                                            $akhir = $_POST['tglakhir'];
+                                                if($mulai != null || $akhir != null){
+                                                
+                                                    $ambilsemuadatastockopname = mysqli_query($conn, "select * from stockopname so, stock s  where s.idbarang = so.idbarang and
+                                                    tanggal BETWEEN  '$mulai' and '$akhir' order by idstockopname DESC"); 
+                                                } else {
+                                                    $ambilsemuadatastockopname = mysqli_query($conn, "select * from stockopname so, stock s where s.idbarang = so.idbarang  ORDER BY idstockopname DESC");
+                                                }
+                                                
+                                            } else {
+                                                $ambilsemuadatastockopname = mysqli_query($conn, "select * from stockopname so, stock s where s.idbarang = so.idbarang");
+                                                            
+                                            }                                      
+                                            $i=1;
+                                            while($data=mysqli_fetch_array($ambilsemuadatastockopname)){
+                                                $ids = $data['idstockopname'];
+                                                $idb = $data['idbarang'];
+                                                $tanggal =$data['tanggal'];
+                                                $namabarang = $data['namabarang'];
+                                                $jenis = $data['jenis'];
+                                                $qty = $data['stocksistem'];
+                                                $stockfisik = $data['stockfisik'];
+                                                $selisih = $data['selisih'];
+                                                $petugas = $data['petugas'];
+                                                $keterangan = $data['keterangan'];
+                                                $selisihharga = $data['selisih_harga'] ;
+                                                                                        
+                                            ; ?>
+                                            <tr>
+                                                <td><?=$i++;?></td>
+                                                <td><?=$tanggal;?></td>
+                                                <td><?=$namabarang;?></td>
+                                                <td><?=$qty;?></td>
+                                                <td><?=$stockfisik;?></td>
+                                                <td><?=$selisih;?></td>
+                                                <td>Rp. <?= number_format($selisihharga,2,',','.')   ;?></td>
+                                                <td><?=$petugas;?></td>
+                                                <td><?=$keterangan;?></td>
+                                            </tr>
+                                                <!-- Edit Modal -->
+                                            <div class="modal" id="edit<?=$ids;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title"><strong>EDIT STOCK OPNAME</strong></h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+
+                                                        <!-- Modal body -->
+                                                        <form method="post">
+                                                            <div class="modal-body">
+                                                                <input type="number" name="stockfisik" value="<?=$stockfisik;?>" class="form-control" placeholder="Stock fisik" required>
+                                                                <br>
+                                                                <input type="text" name="petugas" value="<?=$petugas;?>" class="form-control" placeholder="Petugas" required>
+                                                                <br>
+                                                                <input type="hidden" name="idb" value="<?=$idb;?>">
+                                                                <input type="hidden" name="idm" value="<?=$ids;?>">
+                                                                <button type="submit" class="btn btn-primary" name="updatebarangso">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>                                       
+                                            <?php 
+                                            } 
+                                            ; ?>                                  
+                                        </tbody>
+                                    </table>  
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -41,7 +41,7 @@ if(isset($_POST['login'])){
     $pass = $_POST['password'];
       
     // menambagkan ke db 
-    $query = "select * from user where email='$email'";
+    $query = "select * from user where email='$email' or nama='$email'";
     $cekdb = mysqli_query($conn, $query);
     $hitung = mysqli_num_rows($cekdb);
     $pw = mysqli_fetch_array($cekdb);
@@ -245,7 +245,7 @@ if(isset($_POST['updatebarang'])){
 
     $update = mysqli_query($conn, "update stock set kode='$kode',namabarang='$namabarang', jenis='$jenis', harga='$harga' where idbarang='$idb'");
     if($update){
-        header('location:indy.php');
+        header('location:index.php');
     } else {
         echo "Gagal";
         header('location:index.php');

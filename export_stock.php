@@ -19,6 +19,7 @@ require 'cek.php';
 
 <body>
 <div class="container">
+<button><a href="index.php" type="button" class="btn btn-light">Kembali</a></button>
 <h2>Stock Bahan</h2>
 <h4>(Inventory)</h4>
     <div class="data-tables datatable-dark">
@@ -54,11 +55,7 @@ require 'cek.php';
                 
                 <?php  
                 }
-                ;?>
-                
-                
-            
-                                                                
+                ;?>                                                  
             </tbody>
         </table>					
     </div>
